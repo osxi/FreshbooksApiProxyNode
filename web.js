@@ -32,21 +32,31 @@ function getAll(collection, res){
       console.log(err);
       res.send(500);
     }
+    //console.log('page 1');
 
-    results.push(resModels);
+    results = resModels;
     pages = Number(options.pages)
+    var pageCounter = 1;
     if(pages > 1) {
-      for(var i = 2; i <= Number(options.pages); i++) {
-        collection.list({page: i}, function(err, pageModels){
+      for(var i = 2; i <= pages; i++) {
+        collection.list({page: i}, function(err, pageModels, options){
           if(err) { throw err; }
-          results.push(pageModels);
-          if(i > pages) {
-            res.send(_.flatten(results));
+
+          pageModels.forEach(function(val) {
+            results.push(val);
+          })
+
+          if(++pageCounter === pages) {
+            //console.log('send results', pageCounter, pages);
+            res.send(results);
+          } else {
+            //console.log('counter', pageCounter, 'pages', pages);
           }
         });
       }
     } else {
-      res.send(_.flatten(results));
+      console.log('pages is 1 or 0', results.length);
+      res.send(results);
     }
   });
 }
