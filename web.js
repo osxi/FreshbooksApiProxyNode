@@ -57,12 +57,12 @@ app.get('/tasks', function(req, res){
 app.get('/projects', function(req, res){
   var freshbooks = new FreshBooks(apiUrl(req), authToken(req)),
       projects = new freshbooks.Project();
-  getAll(projects, res, options);
+  getAll(projects, res);
 });
 app.get('/staffs', function(req, res){
   var freshbooks = new FreshBooks(apiUrl(req), authToken(req)),
       staffs = new freshbooks.Staff();
-  getAll(staffs, res, options);
+  getAll(staffs, res);
 });
 app.post('/time_entries', function(req, res){
   var freshbooks = new FreshBooks(apiUrl(req), authToken(req)),
