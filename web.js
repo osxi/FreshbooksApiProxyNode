@@ -32,7 +32,6 @@ function getAll(collection, res){
       console.log(err);
       res.send(500);
     }
-    //console.log('page 1');
 
     results = resModels;
     pages = Number(options.pages)
@@ -47,15 +46,11 @@ function getAll(collection, res){
           })
 
           if(++pageCounter === pages) {
-            //console.log('send results', pageCounter, pages);
             res.send(results);
-          } else {
-            //console.log('counter', pageCounter, 'pages', pages);
           }
         });
       }
     } else {
-      console.log('pages is 1 or 0', results.length);
       res.send(results);
     }
   });
