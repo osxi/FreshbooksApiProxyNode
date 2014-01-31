@@ -55,16 +55,6 @@ function getAll(collection, res){
     }
   });
 }
-function js_yyyy_mm_dd_hh_mm_ss() {
-  now = new Date();
-  year = "" + now.getFullYear();
-  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
-  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
-  hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
-  minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
-  second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
-  return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-}
 function apiUrl(req) {
   return req.query.api_url.toString().replace(/"/g, '');
 }
@@ -96,7 +86,7 @@ app.post('/time_entries', function(req, res){
   timeEntry.staff_id   = req.body.time_entry.staff_id;
   timeEntry.notes      = req.body.time_entry.notes;
   timeEntry.hours      = Number(req.body.time_entry.hours);
-  timeEntry.date       = js_yyyy_mm_dd_hh_mm_ss();
+  timeEntry.date       = req.body.time_entry.date;
 
   timeEntry.create(function(err, timeEntry){
     if(err) {
@@ -108,7 +98,7 @@ app.post('/time_entries', function(req, res){
   });
 });
 
-var port = Number(process.env.PORT || 3000);
+var port = Number(process.env.PORT || 3001);
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
