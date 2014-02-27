@@ -27,15 +27,17 @@ app.use(function (req, res, next) {
 
 function getAll(collection, res){
   collection.list(function(err, resModels, options){
-    var results = [], pages;
+    var results = [], pages = 1;
     if(err) {
       console.log(err);
       res.send(500);
     }
-
     results = resModels;
-    pages = Number(options.pages)
-    var pageCounter = 1;
+
+    if(options && options.pages) {
+      pages = Number(options.pages)
+    }
+    var pageCounter = 1
     if(pages > 1) {
       for(var i = 2; i <= pages; i++) {
         collection.list({page: i}, function(err, pageModels, options){
