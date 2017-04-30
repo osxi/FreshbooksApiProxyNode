@@ -1,6 +1,8 @@
 FreshBooks API Proxy Server
 ===========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/osxi/FreshbooksApiProxyNode.svg)](https://greenkeeper.io/)
+
 This is simply used as a proxy to the FresBbooks API. It's running on Heroku
 here:
 [https://freshbooks-api-node.herokuapp.com](https://freshbooks-api-node.herokuapp.com)
